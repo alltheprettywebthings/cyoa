@@ -282,7 +282,7 @@ and is in no way endorsed by said user.-->
   }
 </style>
 <div class="container">
-  <section class="game-con">
+  <section class="game-con" id="cyoa_top">
     <section class="col-a">
       <div id="statusCon">
         <div class="line-space" id="HP">HP: <span id="hp_js"></span></div>
@@ -364,6 +364,7 @@ and is in no way endorsed by said user.-->
     cyoa.data.bossLinks = document.getElementById("boss_links");
     cyoa.data.oapLink = document.getElementById("oap_link");
     cyoa.data.phLinks = document.getElementById("ph_links");
+    cyoa.data.top = document.getElementById("cyoa_top");
 
 
     //sound vars
@@ -1131,6 +1132,7 @@ and is in no way endorsed by said user.-->
     // Event listener that controls everything that happens
 
     cyoa.data.rpgOptions.addEventListener("click", function(e) {
+      cyoa.data.top.scrollIntoView();
       if(e.target.getAttribute('data-choice') === "0"){ //Start a new game button
         if (cyoa.data.clicker == true){
           cyoa.funk.snDiaKickoff();
