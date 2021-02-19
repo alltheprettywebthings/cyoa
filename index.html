@@ -1225,6 +1225,8 @@ and is in no way endorsed by said user.-->
       if(e.target.getAttribute('data-choice') === "2_0_1"){ // OAP button on Sunday
         if (cyoa.data.clicker===true){
           cyoa.funk.snDiaKickoff();
+          cyoa.data.contextLinks.classList.remove("hidden");
+          cyoa.data.oapLink.classList.remove("hidden");
           cyoa.funk.sn2_0_1Dia();
         }
       };
