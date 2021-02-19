@@ -413,6 +413,10 @@ and is in no way endorsed by said user.-->
       document.getElementById('usd_js').innerText = cyoa.data.statValues[4];
       cyoa.funk.flashStats();
     };
+    cyoa.funk.typewriter = function() {
+      var i=0;
+
+    }
     cyoa.funk.imgPlay = function() {
       cyoa.image.walk.classList.remove("display-none");
       cyoa.image.jump.classList.add("display-none");
@@ -642,9 +646,9 @@ and is in no way endorsed by said user.-->
     }
     cyoa.funk.sn3_1_1_1Dia = function(){
       setTimeout(function() {cyoa.data.pMake0.textContent = "You sit down at the bar for a few minutes. PFC J. sits next to you. You buy a pitcher of beer, then another. You both begin to loosen up, and the conversation gets louder - loud enough that you don't notice the tap on your shoulder, at first."}, cyoa.data.timing1);
+      setTimeout(function() {cyoa.sounds.loseAudio.play();}, cyoa.data.timing1);
       setTimeout(function() {cyoa.data.pMake1.textContent = "You turn around - it's your 1SG."}, cyoa.data.timing2);
       cyoa.funk.imgLose();
-      setTimeout(function() {cyoa.sounds.loseAudio.play();}, cyoa.data.timing2);
       cyoa.data.statValues[4] =0;
       cyoa.data.statValues[3] -=5;
       setTimeout(function() {cyoa.funk.updateStats();}, cyoa.data.timing3);
