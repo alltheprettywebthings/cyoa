@@ -82,6 +82,9 @@ and is in no way endorsed by said user.-->
     .rpg-header{
       display:none;
     }
+    .game_logos{
+      max-width:50%;
+    }
   }
 
   @media screen and (min-device-width:768px){
@@ -140,6 +143,9 @@ and is in no way endorsed by said user.-->
     }
     .imageCon{
 
+    }
+    .game_logos{
+      max-width:20%;
     }
   }
 
@@ -280,6 +286,11 @@ and is in no way endorsed by said user.-->
     margin-right:8px;
     margin-top:10px;
   }
+  .game_logos{
+    display:block;
+    margin-left:auto;
+    margin-right:auto;
+  }
 </style>
 <div class="container">
   <section class="game-con" id="cyoa_top">
@@ -318,19 +329,25 @@ and is in no way endorsed by said user.-->
       <button class="rpgBtns" id="b2" data-choice=""></button>
       <button class="rpgBtns" id="b3" data-choice=""></button>
       <button class="rpgBtns" id="b4" data-choice=""></button>
-      <button class="rpgBtns" id="test" data-choice="test">Add money</button>
     </div>
   </section>
 </div>
 <section id="context_links" class="hidden">
-  <p id="boss_links" class="two-p-font hidden"> Click or tap for BOSS programs on;
+  <p id="boss_links" class="two-p-font-dark hidden"> 
+    <img
+          src="8-bit-boss.png"
+          alt="BOSS logo, 8-bit style" class="game_logos"><br>
+          Click or tap for BOSS programs on;
     <a href="http://jberlife.com/boss/" target="_blank" class="game_my_1">JBER</a>  
     <a href="http://jberlife.com/boss/" target="_blank" class="game_my_1">FWA</a>
   </p>
-  <p class="two-p-font hidden" id="oap_link">For the JBER OAP:
+  <p class="two-p-font-dark hidden" id="oap_link"><img
+          src="mountainpixel.png"
+          alt="8-bit mountains" class="game_logos"><br>For the JBER OAP:
     <a href="http://jberlife.com/oap/" target="_blank" id="oap_link" class="game_my_1">Click here</a>
+    
   </p>
-  <p class="two-p-font hidden" id="ph_links">For a free ride home:
+  <p class="two-p-font-dark hidden" id="ph_links">For a free ride home:
     <a href="tel:1-907-384-7344" id="jbadd_ph" class="game_my_1">(JBER) JBADD van: 1-907-384-7344</a>
     <a href="tel:1-907-353-4145" id="sadd_ph" class="game_my_1">(FWA) SADD van: 1-907-353-4145</a>
   </p>
@@ -864,7 +881,7 @@ and is in no way endorsed by said user.-->
       setTimeout(cyoa.funk.enableClick, cyoa.data.timing4);
     }
     cyoa.funk.sn3_x_dDia = function(){
-      setTimeout(function() {cyoa.data.pMake0.textContent = "-$24,265 -5FUN -20 Reasoning -10 Perception -45HP"}, cyoa.data.timing1);
+      setTimeout(function() {cyoa.data.pMake0.textContent = "-$225000 -5FUN -20 Reasoning -10 Perception -45HP"}, cyoa.data.timing1);
       cyoa.funk.imgLose();
       cyoa.data.statValues[4] =-225000;
       cyoa.data.statValues[3] =0;
@@ -1128,12 +1145,6 @@ and is in no way endorsed by said user.-->
         if (cyoa.data.clicker == true){
           cyoa.funk.snDiaKickoff();
           cyoa.funk.initGame();
-        }
-      };
-      if(e.target.getAttribute('data-choice') === "test"){ //math test button
-        if (cyoa.data.clicker == true){
-          cyoa.data.statValues[4] -=2;
-          cyoa.funk.updateStats();
         }
       };
       if(e.target.getAttribute('data-choice') === "0_1"){ //Go to Sunday
@@ -1541,7 +1552,8 @@ and is in no way endorsed by said user.-->
             cyoa.data.phLinks.classList.remove("hidden");
             cyoa.funk.sn3_x_cDia();
           }
-          else{
+          if (randomSeed >= 0.75)
+          {
             cyoa.funk.snDiaKickoff();
             cyoa.data.contextLinks.classList.remove("hidden");
             cyoa.data.phLinks.classList.remove("hidden");
