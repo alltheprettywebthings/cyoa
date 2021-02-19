@@ -295,6 +295,74 @@ and is in no way endorsed by said user.-->
     margin-left:auto;
     margin-right:auto;
   }
+#stats-modal {
+  visibility: hidden;
+  opacity: 0;
+  transition: all .5s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+#stats-modal:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+#stats-modal .modal {
+  opacity: 0;
+  transform: translateY(-1rem);
+  transition: all .3s cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition-delay: .2s;
+}
+
+#stats-modal:target .modal {
+transform: translateY(0);
+opacity: 1;
+}
+
+/* Modal Container Styles */
+.modal-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal Background Styles */
+.modal-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, .2);
+}
+
+/* Modal Body Styles */
+.modal {
+  z-index: 1;
+  font-family: 'Press Start 2P', sans-serif;
+  background-color: white;
+  width: 80%;
+  max-width: 500px;
+  padding: 1rem;
+  border-radius: 8px;
+}
+.qcon{
+  width:100%;
+  text-align:right;
+}
+#q{
+  color:white;
+}
+#modalcloser a{
+  text-decoration:none;
+}
+  /* Show the tooltip text when you mouse over the tooltip container */
+  .ttip:hover .ttiptxt {
+    visibility: visible;
 </style>
 <div class="container">
   <section class="game-con" id="cyoa_top">
@@ -305,6 +373,7 @@ and is in no way endorsed by said user.-->
         <div class="line-space" id="PER">Perception: <span id="per_js"></span></div>
         <div class="line-space" id="FUN">Fun: <span id="fun_js"></span></div>
         <div>$ <span id="usd_js"></span></div>
+        <div class="qcon"><a href="#stats-modal" id="q">?</a></div>
       </div>
       <div class="imageCon">
         <img
@@ -336,6 +405,25 @@ and is in no way endorsed by said user.-->
     </div>
   </section>
 </div>
+<div 
+    class="modal-container" 
+    id="stats-modal">
+
+    <!-- Modal  -->
+    <div class="modal">
+      <div class="qcon">
+        <span id="modalcloser"><a href="#">&times;</a></span>
+      </div>
+      <p>These are your stats:</p>
+      <p>HP = your health. </p>
+      <p>$ = your money.</p>
+      <p>Fun = how much fun you're having.</p> 
+      <p>Reasoning, Perception = your current abilities to reason and perceive things.</p>
+    </div>
+
+    <!-- Background, click to close -->
+    <a href="#" class="modal-bg"></a>
+  </div>
 <section id="context_links" class="hidden">
   <p id="boss_links" class="two-p-font-dark hidden"> 
     <img
@@ -1153,7 +1241,6 @@ and is in no way endorsed by said user.-->
     }
 
     // Event listener that controls everything that happens
-
     cyoa.data.rpgOptions.addEventListener("click", function(e) {
       cyoa.data.top.scrollIntoView();
       if(e.target.getAttribute('data-choice') === "0"){ //Start a new game button
