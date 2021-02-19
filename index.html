@@ -318,6 +318,7 @@ and is in no way endorsed by said user.-->
       <button class="rpgBtns" id="b2" data-choice=""></button>
       <button class="rpgBtns" id="b3" data-choice=""></button>
       <button class="rpgBtns" id="b4" data-choice=""></button>
+      <button class="rpgBtns" id="test" data-choice="test">Add money</button>
     </div>
   </section>
 </div>
@@ -364,8 +365,12 @@ and is in no way endorsed by said user.-->
     cyoa.data.bossLinks = document.getElementById("boss_links");
     cyoa.data.oapLink = document.getElementById("oap_link");
     cyoa.data.phLinks = document.getElementById("ph_links");
-    cyoa.data.top = document.getElementById("cyoa_top");
 
+    //image vars
+    cyoa.image = {};
+    cyoa.image.walk = document.getElementById("player-walk");
+    cyoa.image.jump = document.getElementById("player-jump");
+    cyoa.image.kneel = document.getElementById("player-kneel");
 
     //sound vars
     cyoa.sounds = {};
@@ -377,14 +382,9 @@ and is in no way endorsed by said user.-->
     cyoa.sounds.clickAudio = new Audio('https://usarak-official.github.io/cyoa/270324__littlerobotsoundfactory__menu-navigate-00.wav');
     cyoa.sounds.pewAudio = new Audio('https://usarak-official.github.io/cyoa/270306__littlerobotsoundfactory__explosion-02.wav');
 
-    //image vars
-    cyoa.image = {};
-    cyoa.image.walk = document.getElementById("player-walk");
-    cyoa.image.jump = document.getElementById("player-jump");
-    cyoa.image.kneel = document.getElementById("player-kneel");
-
     //functions
     cyoa.funk = {};
+
     //Anims
     cyoa.funk.updateStats = function() {
       document.getElementById('hp_js').innerText = cyoa.data.statValues[0];
@@ -516,6 +516,7 @@ and is in no way endorsed by said user.-->
       cyoa.sounds.pewAudio.play();
       cyoa.data.statValues[3] +=10;
       cyoa.funk.updateStats();
+      cyoa.funk.imgWin();
       setTimeout(function() {cyoa.data.pMake0.textContent = "+10 FUN"}, cyoa.data.timing1);
       setTimeout(function() {cyoa.data.pMake1.textContent = "Watching the tournament was pretty enjoyable, plus you got free snacks."}, cyoa.data.timing2);
       setTimeout(function() {cyoa.data.pMake3.textContent = "Sgt. Binky managed to win the entire competition, even without opposable thumbs."}, cyoa.data.timing3);
@@ -601,14 +602,14 @@ and is in no way endorsed by said user.-->
     }
     cyoa.funk.sn3_1Dia = function(){
       setTimeout(function() {cyoa.data.pMake0.textContent = "Oh no!"}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.pMake1.textContent = "One of the people in the group is 19, and can't legally drink alcohol."}, cyoa.data.timing2);
+      setTimeout(function() {cyoa.data.pMake1.textContent = "PFC J. is only 19, and can't legally drink alcohol."}, cyoa.data.timing2);
       setTimeout(function() {cyoa.data.pMake2.textContent = "You decide to..."}, cyoa.data.timing3); 
       cyoa.funk.optSet3_1();
       setTimeout(cyoa.funk.enableClick, cyoa.data.timing3);
     }
     cyoa.funk.sn3_1_1Dia = function(){
-      setTimeout(function() {cyoa.data.pMake0.textContent = "You arrive at the bar."}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.pMake1.textContent = "There's an employee at the entrance checking IDs. She looks sober and sharp-eyed."}, cyoa.data.timing2);
+      setTimeout(function() {cyoa.data.pMake0.textContent = "You arrive at a bar."}, cyoa.data.timing1);
+      setTimeout(function() {cyoa.data.pMake1.textContent = "While waiting in line, a fight begins on the street nearby. The employee checking IDs at the front door wanders over to look."}, cyoa.data.timing2);
       setTimeout(function() {cyoa.data.pMake2.textContent = "You..."}, cyoa.data.timing3); 
       cyoa.funk.optSet3_1_1();
       setTimeout(cyoa.funk.enableClick, cyoa.data.timing3);
@@ -621,37 +622,24 @@ and is in no way endorsed by said user.-->
       setTimeout(cyoa.funk.enableClick, cyoa.data.timing3);
     }
     cyoa.funk.sn3_1_1_1Dia = function(){
-      setTimeout(function() {cyoa.data.pMake0.textContent = "While waiting in line, you notice the employee at the front door holding herself in a very alert manner. You try to shake off your suspicions. She examines your ID with a critical eye and waves you through. She stops your 19-year old colleague. \"He's with me,\" you say."}, cyoa.data.timing1);
+      setTimeout(function() {cyoa.data.pMake0.textContent = "You sit down at the bar for a few minutes. PFC J. sits next to you. You buy a pitcher of beer, then another. You both begin to loosen up, and the conversation gets louder - loud enough that you don't notice the tap on your shoulder, at first."}, cyoa.data.timing1);
+      setTimeout(function() {cyoa.data.pMake1.textContent = "You turn around - it's your 1SG."}, cyoa.data.timing2);
       cyoa.funk.imgLose();
-      setTimeout(function() {cyoa.data.pMake1.textContent = "\"Great,\" she says, and shows you her police identification. \"I'll need to ask both of you a few questions.\""}, cyoa.data.timing2);
       setTimeout(function() {cyoa.sounds.loseAudio.play();}, cyoa.data.timing3);
-      setTimeout(function() {cyoa.data.statValues[4] -=24265;}, cyoa.data.timing3);
-      setTimeout(function() {cyoa.data.statValues[3] -=5;}, cyoa.data.timing3);
+      cyoa.data.statValues[4] =0;
+      cyoa.data.statValues[3] -=5;
       setTimeout(function() {cyoa.funk.updateStats();}, cyoa.data.timing3);
-      setTimeout(function() {cyoa.data.pMake2.textContent = "You receive a General Officer Memorandum of Reprimand, face years of legal fees, court fees and fines, increased insurance, and the possibility of being processed for discharge."}, cyoa.data.timing3);
-      setTimeout(function() {cyoa.data.pMake3.textContent = "GAME OVER. -$24,265, -5 FUN"}, cyoa.data.timing4); 
+      setTimeout(function() {cyoa.data.pMake2.textContent = "The Article 15 hearing results in reduction in rank, forfeiture of $500 of pay per month for 3 months, 45 days restriction to base and 45 days extra duty."}, cyoa.data.timing3);
+      setTimeout(function() {cyoa.data.pMake3.textContent = "GAME OVER."}, cyoa.data.timing4); 
       cyoa.funk.optSetReset();
       setTimeout(cyoa.funk.enableClick, cyoa.data.timing4);
     }
     cyoa.funk.sn3_1_1_2Dia = function(){
-      setTimeout(function() {cyoa.data.pMake0.textContent = "You wait in line. When you get close to the door, you suddenly double over in feigned distress."}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.pMake1.textContent = "\"Oh! My leg! My foot!\" Several people cluster around you and ask what's wrong. \"Oh, it hurts so bad! It must be-\" you rack your brain for something believable. \"Gout!\""}, cyoa.data.timing2);
-      setTimeout(function() {cyoa.data.pMake2.textContent = "As ridiculous as it was, it must have worked; your 19-year-old colleague slipped into the bar in the commotion."}, cyoa.data.timing3); 
-      cyoa.funk.optSet3_1_1_2();
+      setTimeout(function() {cyoa.data.pMake0.textContent = "You sit down for a drink."}, cyoa.data.timing1);
+      setTimeout(function() {cyoa.data.pMake1.textContent = "One drink turns into several. You feel fine, and stand up to close your tab."}, cyoa.data.timing2);
+      setTimeout(function() {cyoa.data.pMake2.textContent = "Whoa - that sent the alcohol straight to your head."}, cyoa.data.timing3); 
+      cyoa.funk.optSet3_2_4_1_a();
       setTimeout(cyoa.funk.enableClick, cyoa.data.timing3);
-    }
-    cyoa.funk.sn3_1_1_2_1Dia = function(){
-      setTimeout(function() {cyoa.data.pMake0.textContent = "You sit down at the bar for a few minutes. Before long, you notice singing behind you."}, cyoa.data.timing1);
-      cyoa.funk.imgLose();
-      setTimeout(function() {cyoa.data.pMake1.textContent = "The minor you brought along is singing karaoke, and is surprisingly good at it."}, cyoa.data.timing2);
-      setTimeout(function() {cyoa.sounds.loseAudio.play();}, cyoa.data.timing3);
-      setTimeout(function() {cyoa.data.statValues[4] -=24265;}, cyoa.data.timing3);
-      setTimeout(function() {cyoa.data.statValues[3] -=5;}, cyoa.data.timing3);
-      setTimeout(function() {cyoa.funk.updateStats();}, cyoa.data.timing3);
-      setTimeout(function() {cyoa.data.pMake3.textContent = "Unfortunately, someone recognizes your friend, and the police are called. You now face legal charges, an average of over $24,265 in fines, fees and other penalties, as well as a GOMOR - and to top it off, you may no longer have a career."}, cyoa.data.timing3);
-      setTimeout(function() {cyoa.data.pMake4.textContent = "GAME OVER. -$24,265, -5 FUN"}, cyoa.data.timing4); 
-      cyoa.funk.optSetReset();
-      setTimeout(cyoa.funk.enableClick, cyoa.data.timing4);
     }
     cyoa.funk.sn3_2Dia = function(){
       setTimeout(function() {cyoa.data.pMake0.textContent = "You have options;"}, cyoa.data.timing1);
@@ -671,9 +659,9 @@ and is in no way endorsed by said user.-->
       setTimeout(function() {cyoa.data.pMake0.textContent = "You volunteer to drive. When you get to the bar, there's a special for unlimited non-alcoholic drinks and appetizers for designated drivers."}, cyoa.data.timing1);
       setTimeout(function() {cyoa.data.pMake1.textContent = "You make $20 in tips, get free food and feel hydrated. You also have fun talking to the waitstaff. Before long, it's time to head home."}, cyoa.data.timing2);
       setTimeout(function() {cyoa.data.pMake2.textContent = "+$20 +5HP +10FUN"}, cyoa.data.timing3); 
-      setTimeout(function() {cyoa.data.statValues[0] +=5;}, cyoa.data.timing3);
-      setTimeout(function() {cyoa.data.statValues[3] +=10;}, cyoa.data.timing3);
-      setTimeout(function() {cyoa.data.statValues[4] +=20;}, cyoa.data.timing3);
+      cyoa.data.statValues[0] +=5;
+      cyoa.data.statValues[3] +=10;
+      cyoa.data.statValues[4] +=20;
       setTimeout(function() {cyoa.funk.updateStats();}, cyoa.data.timing3);
       setTimeout(function() {cyoa.sounds.collectAudio.play();}, cyoa.data.timing3); 
       cyoa.funk.optSetNextDay();
@@ -687,7 +675,7 @@ and is in no way endorsed by said user.-->
       setTimeout(cyoa.funk.enableClick, cyoa.data.timing3);
     }
     cyoa.funk.sn3_2_2_bDia = function(){
-      setTimeout(function() {cyoa.data.pMake0.textContent = "You arrive at the bar. Looking over the group, you see that a member of your group isn't 21."}, cyoa.data.timing1);
+      setTimeout(function() {cyoa.data.pMake0.textContent = "You arrive at the bar. Looking over the group, you see that PFC J. is 19, and can't legally drink."}, cyoa.data.timing1);
       setTimeout(function() {cyoa.data.pMake1.textContent = "There's an employee at the entrance checking IDs. She looks sober and sharp-eyed."}, cyoa.data.timing2);
       setTimeout(function() {cyoa.data.pMake2.textContent = "You..."}, cyoa.data.timing3); 
       cyoa.funk.optSet3_1_1();
@@ -696,10 +684,10 @@ and is in no way endorsed by said user.-->
     cyoa.funk.sn3_2_2_1_aDia = function(){
       setTimeout(function() {cyoa.data.pMake0.textContent = "-$75 +10FUN -20 Reasoning -10 Perception"}, cyoa.data.timing1);
       setTimeout(function() {cyoa.sounds.hitAudio.play();}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[4] -=75;}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[3] +=10;}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[2] -=20;}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[1] -=10;}, cyoa.data.timing1);
+      cyoa.data.statValues[4] -=75;
+      cyoa.data.statValues[3] +=10;
+      cyoa.data.statValues[2] -=20;
+      cyoa.data.statValues[1] -=10;
       setTimeout(function() {cyoa.funk.updateStats();}, cyoa.data.timing1);
       setTimeout(function() {cyoa.data.pMake1.textContent = "Your head feels fuzzy, your wallet feels light and you're pretty sure the bartender has a twin that wasn't there before."}, cyoa.data.timing2);
       setTimeout(function() {cyoa.data.pMake2.textContent = "You look around, and your friend the designated driver looks clear-eyed, happy and sober, and is rounding everyone up to go home."}, cyoa.data.timing3);
@@ -716,10 +704,10 @@ and is in no way endorsed by said user.-->
     cyoa.funk.sn3_2_2_1_bDia = function(){
       setTimeout(function() {cyoa.data.pMake0.textContent = "-$75 +10FUN -20 Reasoning -10 Perception"}, cyoa.data.timing1);
       setTimeout(function() {cyoa.sounds.hitAudio.play();}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[4] -=75;}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[3] +=10;}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[2] -=20;}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[1] -=10;}, cyoa.data.timing1);
+      cyoa.data.statValues[4] -=75;
+      cyoa.data.statValues[3] +=10;
+      cyoa.data.statValues[2] -=20;
+      cyoa.data.statValues[1] -=10;
       setTimeout(function() {cyoa.funk.updateStats();}, cyoa.data.timing1);
       setTimeout(function() {cyoa.data.pMake1.textContent = "Your head feels fuzzy, your wallet feels light and you're pretty sure the bartender has a twin that wasn't there before."}, cyoa.data.timing2);
       setTimeout(function() {cyoa.data.pMake2.textContent = "Oh no! Your designated driver ended up drinking, and can't drive. After some talk, you decide to..."}, cyoa.data.timing3);
@@ -729,7 +717,7 @@ and is in no way endorsed by said user.-->
     cyoa.funk.sn3_2_2_1_1Dia = function(){
       setTimeout(function() {cyoa.data.pMake0.textContent = "-$11"}, cyoa.data.timing1);
       setTimeout(function() {cyoa.sounds.hitAudio.play();}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[4] -=11;}, cyoa.data.timing1);
+      cyoa.data.statValues[4] -=11;
       setTimeout(function() {cyoa.funk.updateStats();}, cyoa.data.timing1);
       setTimeout(function() {cyoa.data.pMake1.textContent = "You split a cab ride, and head home safely."}, cyoa.data.timing2);
       setTimeout(function() {cyoa.data.pMake2.textContent = "Now it's getting late, and time to settle down for the night."}, cyoa.data.timing3);
@@ -743,19 +731,19 @@ and is in no way endorsed by said user.-->
       cyoa.funk.optSetNextDay();
       setTimeout(cyoa.funk.enableClick, cyoa.data.timing3);
     }
-    // cyoa.funk.sn3_2_2_1_3Dia = function(){
-    //   setTimeout(function() {cyoa.data.pMake0.textContent = "-$75 +10FUN -20 Reasoning -10 Perception"}, cyoa.data.timing1);
-    //   setTimeout(function() {cyoa.sounds.hitAudio.play();}, cyoa.data.timing1);
-    //   setTimeout(function() {cyoa.data.statValues[4] -=75;}, cyoa.data.timing1);
-    //   setTimeout(function() {cyoa.data.statValues[3] +=10;}, cyoa.data.timing1);
-    //   setTimeout(function() {cyoa.data.statValues[2] +=20;}, cyoa.data.timing1);
-    //   setTimeout(function() {cyoa.data.statValues[1] +=10;}, cyoa.data.timing1);
-    //   setTimeout(function() {cyoa.funk.updateStats();}, cyoa.data.timing1);
-    //   setTimeout(function() {cyoa.data.pMake1.textContent = "Your head feels fuzzy, your wallet feels light and you're pretty sure the bartender has a twin that wasn't there before."}, cyoa.data.timing2);
-    //   setTimeout(function() {cyoa.data.pMake2.textContent = "Oh no! Your designated driver ended up drinking, and can't drive. After some talk, you decide to..."}, cyoa.data.timing3);
-    //   cyoa.funk.optSet3_2_2_1_3();
-    //   setTimeout(cyoa.funk.enableClick, cyoa.data.timing3);
-    // }
+    cyoa.funk.sn3_2_2_1_3Dia = function(){
+      setTimeout(function() {cyoa.data.pMake0.textContent = "-$75 +10FUN -20 Reasoning -10 Perception"}, cyoa.data.timing1);
+      setTimeout(function() {cyoa.sounds.hitAudio.play();}, cyoa.data.timing1);
+      cyoa.data.statValues[4] -=75;
+      cyoa.data.statValues[3] +=10;
+      cyoa.data.statValues[2] +=20;
+      cyoa.data.statValues[1] +=10;
+      setTimeout(function() {cyoa.funk.updateStats();}, cyoa.data.timing1);
+      setTimeout(function() {cyoa.data.pMake1.textContent = "Your head feels fuzzy, your wallet feels light and you're pretty sure the bartender has a twin that wasn't there before."}, cyoa.data.timing2);
+      setTimeout(function() {cyoa.data.pMake2.textContent = "Oh no! Your designated driver ended up drinking, and can't drive. After some talk, you decide to..."}, cyoa.data.timing3);
+      cyoa.funk.optSet3_2_2_1_3();
+      setTimeout(cyoa.funk.enableClick, cyoa.data.timing3);
+    }
     cyoa.funk.sn3_2_3_aDia = function(){
       setTimeout(function() {cyoa.data.pMake0.textContent = "The group decides to take a taxi or the SADD van."}, cyoa.data.timing1);
       setTimeout(function() {cyoa.data.pMake1.textContent = "You arrive at a comedy club. There's a show going on, and it's pretty enjoyable."}, cyoa.data.timing2);
@@ -765,7 +753,7 @@ and is in no way endorsed by said user.-->
     }
     cyoa.funk.sn3_2_3_bDia = function(){
       setTimeout(function() {cyoa.data.pMake0.textContent = "The group decides to take a taxi or the SADD van."}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.pMake1.textContent = "When you get to the bar, you see that one of your members isn't 21."}, cyoa.data.timing2);
+      setTimeout(function() {cyoa.data.pMake1.textContent = "When you get to the bar, you see that PFC J., one of the members in your group, is 19."}, cyoa.data.timing2);
       setTimeout(function() {cyoa.data.pMake2.textContent = "There's someone at the door checking IDs. She looks sober and sharp-eyed. You..."}, cyoa.data.timing3); 
       cyoa.funk.optSet3_2_3_b();
       setTimeout(cyoa.funk.enableClick, cyoa.data.timing3);
@@ -779,7 +767,7 @@ and is in no way endorsed by said user.-->
     }
     cyoa.funk.sn3_2_4_1_aDia = function(){
       setTimeout(function() {cyoa.data.pMake0.textContent = "You head out without a plan to get home."}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.pMake1.textContent = "When you get to the bar, you see that one of your members isn't 21."}, cyoa.data.timing2);
+      setTimeout(function() {cyoa.data.pMake1.textContent = "When you get to the bar, you see that PFC J., one of the people in your group, is 19."}, cyoa.data.timing2);
       setTimeout(function() {cyoa.data.pMake2.textContent = "There's someone at the door checking IDs. She looks sober and sharp-eyed. You..."}, cyoa.data.timing3); 
       cyoa.funk.optSet3_2_4_1_b();
       setTimeout(cyoa.funk.enableClick, cyoa.data.timing3);
@@ -787,10 +775,10 @@ and is in no way endorsed by said user.-->
     cyoa.funk.sn3_2_3_1Dia = function(){
       setTimeout(function() {cyoa.data.pMake0.textContent = "-$75 +10FUN -20 Reasoning -10 Perception"}, cyoa.data.timing1);
       setTimeout(function() {cyoa.sounds.hitAudio.play();}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[4] -=75;}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[3] +=10;}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[2] +=20;}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[1] +=10;}, cyoa.data.timing1);
+      cyoa.data.statValues[4] -=75;
+      cyoa.data.statValues[3] +=10;
+      cyoa.data.statValues[2] +=20;
+      cyoa.data.statValues[1] +=10;
       setTimeout(function() {cyoa.funk.updateStats();}, cyoa.data.timing1);
       setTimeout(function() {cyoa.data.pMake1.textContent = "Against all odds you managed to rack up a $75 bill while drinking $16 drinks."}, cyoa.data.timing2);
       setTimeout(function() {cyoa.data.pMake2.textContent = "It's time to get going - how are you getting home?"}, cyoa.data.timing3);
@@ -814,11 +802,11 @@ and is in no way endorsed by said user.-->
     cyoa.funk.sn3_2_4_2_4Dia = function(){
       setTimeout(function() {cyoa.data.pMake0.textContent = "-$75 +10FUN -20 Reasoning -10 Perception"}, cyoa.data.timing1);
       setTimeout(function() {cyoa.sounds.hitAudio.play();}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[4] -=75;}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[3] +=10;}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[2] +=20;}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[1] +=10;}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.funk.updateStats();}, cyoa.data.timing2);
+      cyoa.data.statValues[4] -=75;
+      cyoa.data.statValues[3] +=10;
+      cyoa.data.statValues[2] +=20;
+      cyoa.data.statValues[1] +=10;
+      setTimeout(function() {cyoa.funk.updateStats();}, cyoa.data.timing1);
       setTimeout(function() {cyoa.data.pMake1.textContent = "Against all odds you managed to rack up a $75 bill while drinking $16 drinks."}, cyoa.data.timing2);
       setTimeout(function() {cyoa.data.pMake2.textContent = "It's time to get going - how are you getting home?"}, cyoa.data.timing3);
       cyoa.funk.optSet3_2_3();
@@ -827,15 +815,16 @@ and is in no way endorsed by said user.-->
     cyoa.funk.sn3_x_aDia = function(){
       setTimeout(function() {cyoa.data.pMake0.textContent = "-$24,265 -5FUN -20 Reasoning -10 Perception -45HP"}, cyoa.data.timing1);
       cyoa.funk.imgLose();
-      setTimeout(function() {cyoa.data.statValues[4] =-24265;}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[3] =0;}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[2] =10;}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[1] =5;}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[0] =5;}, cyoa.data.timing1);
+      cyoa.data.statValues[4] =-24265;
+      cyoa.data.statValues[3] =0;
+      cyoa.data.statValues[2] =10;
+      cyoa.data.statValues[1] =5;
+      cyoa.data.statValues[0] =5;
       setTimeout(function() {cyoa.sounds.loseAudio.play();}, cyoa.data.timing1);
       setTimeout(function() {cyoa.funk.updateStats();}, cyoa.data.timing2);
+      cyoa.funk.imgLose();
       setTimeout(function() {cyoa.data.pMake1.textContent = "You walk out to the car and fumble your keys a few times, but manage to open the door and start the engine. Easing the car out onto the street, you look in your rear-view mirror - and promptly crash into a police car."}, cyoa.data.timing2);
-      setTimeout(function() {cyoa.data.pMake2.textContent = "You are subject to a GOMOR, lose thousands of dollars in fees, fines and added costs, and it looks like you won't have a career any more."}, cyoa.data.timing3);
+      setTimeout(function() {cyoa.data.pMake2.textContent = "Your BrAC registers at .09. You're arrested and prosecuted in civilian state court, and have to face the consequences. However, this is your first DUI, and you're otherwise an outstanding soldier. You receive a locally filed GOMOR - take this as a wake-up call. A really, really expensive wake-up call."}, cyoa.data.timing3);
       setTimeout(function() {cyoa.data.pMake3.textContent = "GAME OVER"}, cyoa.data.timing4);
       cyoa.funk.optSetReset();
       setTimeout(cyoa.funk.enableClick, cyoa.data.timing4);
@@ -843,15 +832,16 @@ and is in no way endorsed by said user.-->
     cyoa.funk.sn3_x_bDia = function(){
       setTimeout(function() {cyoa.data.pMake0.textContent = "-$24,265 -5FUN -20 Reasoning -10 Perception -45HP"}, cyoa.data.timing1);
       cyoa.funk.imgLose();
-      setTimeout(function() {cyoa.data.statValues[4] =-24265;}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[3] =0;}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[2] =10;}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[1] =5;}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[0] =5;}, cyoa.data.timing1);
+      cyoa.data.statValues[4] =-24265;
+      cyoa.data.statValues[3] =0;
+      cyoa.data.statValues[2] =10;
+      cyoa.data.statValues[1] =5;
+      cyoa.data.statValues[0] =5;
       setTimeout(function() {cyoa.sounds.loseAudio.play();}, cyoa.data.timing1);
       setTimeout(function() {cyoa.funk.updateStats();}, cyoa.data.timing2);
+      cyoa.funk.imgLose();
       setTimeout(function() {cyoa.data.pMake1.textContent = "WOOO! Apparently, one too many vodka+energy drink combos lead you to live your life a quarter mile at a time - a very quick quarter mile which ends with you running straight into the guardrail."}, cyoa.data.timing2);
-      setTimeout(function() {cyoa.data.pMake2.textContent = "Fortunately, no one dies - however, You are subject to a GOMOR, lose thousands of dollars in fees, fines and added costs, and it looks like you won't have a career any more."}, cyoa.data.timing3);
+      setTimeout(function() {cyoa.data.pMake2.textContent = "You register a .135 BrAC, you're arrested and prosecuted in federal district court. You also receive a permanently filed General Officer Memorandum of Record."}, cyoa.data.timing3);
       setTimeout(function() {cyoa.data.pMake3.textContent = "GAME OVER"}, cyoa.data.timing4);
       cyoa.funk.optSetReset();
       setTimeout(cyoa.funk.enableClick, cyoa.data.timing4);
@@ -859,15 +849,16 @@ and is in no way endorsed by said user.-->
     cyoa.funk.sn3_x_cDia = function(){
       setTimeout(function() {cyoa.data.pMake0.textContent = "-$24,265 -5FUN -20 Reasoning -10 Perception -45HP"}, cyoa.data.timing1);
       cyoa.funk.imgLose();
-      setTimeout(function() {cyoa.data.statValues[4] =-24265;}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[3] =0;}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[2] =10;}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[1] =5;}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[0] =5;}, cyoa.data.timing1);
+      cyoa.data.statValues[4] =-24265;
+      cyoa.data.statValues[3] =0;
+      cyoa.data.statValues[2] =10;
+      cyoa.data.statValues[1] =5;
+      cyoa.data.statValues[0] =5;
       setTimeout(function() {cyoa.sounds.loseAudio.play();}, cyoa.data.timing1);
       setTimeout(function() {cyoa.funk.updateStats();}, cyoa.data.timing2);
-      setTimeout(function() {cyoa.data.pMake1.textContent = "You decide to drive home slowly, so you'll have more time to react. Unfortunately, due to your low perception, you forgot to turn on the lights and you get rear-ended. A police vehicle arrives at the scene, and determines that you were driving under the influence of intoxicants."}, cyoa.data.timing2);
-      setTimeout(function() {cyoa.data.pMake2.textContent = "You are subject to a GOMOR, lose thousands of dollars in fees, fines and added costs, and it looks like you won't have a career any more."}, cyoa.data.timing3);
+      cyoa.funk.imgLose();
+      setTimeout(function() {cyoa.data.pMake1.textContent = "You decide to drive home slowly, so you'll have more time to react. Unfortunately, due to your low perception, you forgot to turn on the lights and you get rear-ended."}, cyoa.data.timing2);
+      setTimeout(function() {cyoa.data.pMake2.textContent = "When an officer arrives at the scene, you register a .135 BrAC. This is your second DUI. You're arrested and prosecuted in federal district court. You receive a permanently filed GOMOR, and are administratively separated from the Army with a general discharge."}, cyoa.data.timing3);
       setTimeout(function() {cyoa.data.pMake3.textContent = "GAME OVER"}, cyoa.data.timing4);
       cyoa.funk.optSetReset();
       setTimeout(cyoa.funk.enableClick, cyoa.data.timing4);
@@ -875,15 +866,16 @@ and is in no way endorsed by said user.-->
     cyoa.funk.sn3_x_dDia = function(){
       setTimeout(function() {cyoa.data.pMake0.textContent = "-$24,265 -5FUN -20 Reasoning -10 Perception -45HP"}, cyoa.data.timing1);
       cyoa.funk.imgLose();
-      setTimeout(function() {cyoa.data.statValues[4] =-24265;}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[3] =0;}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[2] =10;}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[1] =5;}, cyoa.data.timing1);
-      setTimeout(function() {cyoa.data.statValues[0] =5;}, cyoa.data.timing1);
+      cyoa.data.statValues[4] =-225000;
+      cyoa.data.statValues[3] =0;
+      cyoa.data.statValues[2] =10;
+      cyoa.data.statValues[1] =5;
+      cyoa.data.statValues[0] =5;
       setTimeout(function() {cyoa.sounds.loseAudio.play();}, cyoa.data.timing1);
       setTimeout(function() {cyoa.funk.updateStats();}, cyoa.data.timing2);
-      setTimeout(function() {cyoa.data.pMake1.textContent = "While holding yourself in a pose of nearly perfect sobriety, you don't see the moose until it's too late - for the moose. The people in your car survive the crash, but if you'd run into another vehicle you could have killed someone."}, cyoa.data.timing2);
-      setTimeout(function() {cyoa.data.pMake2.textContent = "You are subject to a GOMOR, lose thousands of dollars in fees, fines and added costs, and it looks like you won't have a career any more. Fortunately, no one died."}, cyoa.data.timing3);
+      cyoa.funk.imgLose();
+      setTimeout(function() {cyoa.data.pMake1.textContent = "While holding yourself in a pose of nearly perfect sobriety, you don't see the moose until it's too late - for the moose. One of your passengers is severely injured."}, cyoa.data.timing2);
+      setTimeout(function() {cyoa.data.pMake2.textContent = "You blow a .135 BrAC. This is your second DUI - you're arrested, and prosecuted in federal district court. You also receive a permanently filed GOMOR, and are administratively separated from the Army with a general discharge. On top of that, you're subject to a civil lawsuit which may cost you hundreds of thousands of dollars."}, cyoa.data.timing3);
       setTimeout(function() {cyoa.data.pMake3.textContent = "GAME OVER"}, cyoa.data.timing4);
       cyoa.funk.optSetReset();
       setTimeout(cyoa.funk.enableClick, cyoa.data.timing4);
@@ -969,18 +961,18 @@ and is in no way endorsed by said user.-->
       cyoa.data.b4.classList.add("hidden");
       cyoa.data.b1.textContent = "Go for a drink anyway";
       cyoa.data.b1.setAttribute("data-choice", "3_1_1");
-      cyoa.data.b2.textContent = "Send the minor home, then go for a drink";
+      cyoa.data.b2.textContent = "Send PFC J. home, then go for a drink";
       cyoa.data.b2.setAttribute("data-choice", "3_1_2");
       cyoa.data.b3.textContent = "Do something else";
       cyoa.data.b3.setAttribute("data-choice", "1_3");
     }
     cyoa.funk.optSet3_1_1 = function(){
       cyoa.data.b4.classList.add("hidden");
-      cyoa.data.b1.textContent = "Try to bluff your way in";
+      cyoa.data.b1.textContent = "Slip inside the bar with PFC J. in tow";
       cyoa.data.b1.setAttribute("data-choice", "3_1_1_1");
-      cyoa.data.b2.textContent = "Create a distraction so the minor can sneak in";
+      cyoa.data.b2.textContent = "Send PFC J. home";
       cyoa.data.b2.setAttribute("data-choice", "3_1_1_2");
-      cyoa.data.b3.textContent = "Leave, because the door clearly says everyone must be 21";
+      cyoa.data.b3.textContent = "Decide to do something else";
       cyoa.data.b3.setAttribute("data-choice", "1_3");
     }
     cyoa.funk.optSet3_1_1_2 = function(){
@@ -1019,7 +1011,7 @@ and is in no way endorsed by said user.-->
       cyoa.data.b4.classList.add("hidden");
       cyoa.data.b1.textContent = "Try to bluff your way in";
       cyoa.data.b1.setAttribute("data-choice", "3_1_1_1");
-      cyoa.data.b2.textContent = "Get the minor a ride home, so the group can enjoy themselves legally";
+      cyoa.data.b2.textContent = "Get PFC J. a ride home, so the group can enjoy themselves legally";
       cyoa.data.b2.setAttribute("data-choice", "3_2_3_a");
       cyoa.data.b3.textContent = "Leave, because the door clearly says everyone must be 21";
       cyoa.data.b3.setAttribute("data-choice", "1_3");
@@ -1065,9 +1057,9 @@ and is in no way endorsed by said user.-->
     }
     cyoa.funk.optSet3_2_4_1_b = function(){
       cyoa.data.b4.classList.add("hidden");
-      cyoa.data.b1.textContent = "Try to bluff your way in";
+      cyoa.data.b1.textContent = "Try to sneak PFC J. in";
       cyoa.data.b1.setAttribute("data-choice", "3_1_1_1");
-      cyoa.data.b2.textContent = "Get the minor a ride home, so the group can enjoy themselves legally";
+      cyoa.data.b2.textContent = "Get PFC J. a ride home, so the group can enjoy themselves legally";
       cyoa.data.b2.setAttribute("data-choice", "3_2_4_1_b_1");
       cyoa.data.b3.textContent = "Leave, because the door clearly says everyone must be 21";
       cyoa.data.b3.setAttribute("data-choice", "1_3");
@@ -1132,11 +1124,16 @@ and is in no way endorsed by said user.-->
     // Event listener that controls everything that happens
 
     cyoa.data.rpgOptions.addEventListener("click", function(e) {
-      cyoa.data.top.scrollIntoView();
       if(e.target.getAttribute('data-choice') === "0"){ //Start a new game button
         if (cyoa.data.clicker == true){
           cyoa.funk.snDiaKickoff();
           cyoa.funk.initGame();
+        }
+      };
+      if(e.target.getAttribute('data-choice') === "test"){ //math test button
+        if (cyoa.data.clicker == true){
+          cyoa.data.statValues[4] -=2;
+          cyoa.funk.updateStats();
         }
       };
       if(e.target.getAttribute('data-choice') === "0_1"){ //Go to Sunday
@@ -1391,14 +1388,14 @@ and is in no way endorsed by said user.-->
           cyoa.funk.sn3_2_2_1_2Dia();
         }
       };
-      // if(e.target.getAttribute('data-choice') === "3_2_2_1_3"){ // Randomizer 
-      //   if (cyoa.data.clicker===true){
-      //     cyoa.funk.snDiaKickoff();
-      //     cyoa.data.contextLinks.classList.remove("hidden");
-      //     cyoa.data.phLinks.classList.remove("hidden");
-      //     cyoa.funk.sn3_2_2_1_3Dia();
-      //   }
-      // };
+      if(e.target.getAttribute('data-choice') === "3_2_2_1_3"){ // Randomizer 
+        if (cyoa.data.clicker===true){
+          cyoa.funk.snDiaKickoff();
+          cyoa.data.contextLinks.classList.remove("hidden");
+          cyoa.data.phLinks.classList.remove("hidden");
+          cyoa.funk.sn3_2_2_1_3Dia();
+        }
+      };
       if(e.target.getAttribute('data-choice') === "3_2_3"){ // Plan to get a ride
         if (cyoa.data.clicker===true){
           if (cyoa.data.minor == true){
@@ -1523,7 +1520,6 @@ and is in no way endorsed by said user.-->
       if(e.target.getAttribute('data-choice') === "3_x"){ // Drink and drive
         if (cyoa.data.clicker===true){
           var randomSeed = Math.random();
-          console.log(randomSeed);
           if (randomSeed <= 0.25)
           {
             cyoa.funk.snDiaKickoff();
