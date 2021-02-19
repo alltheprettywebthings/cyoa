@@ -385,6 +385,9 @@ opacity: 1;
           <img
           src="arrested.gif"
           alt="A video game character kneeling on the ground" class="display-none" id="player-kneel">
+          <img
+          src="binkydance.gif"
+          alt="A dancing binky the polar bear" class="display-none" id="binky-dance">
         <div class="two-p-font-dark mt-10">
           <span id="rpg-rank"></span>
           <span id="rpg-name"></span>
@@ -483,6 +486,7 @@ opacity: 1;
     cyoa.image.walk = document.getElementById("player-walk");
     cyoa.image.jump = document.getElementById("player-jump");
     cyoa.image.kneel = document.getElementById("player-kneel");
+    cyoa.image.binkyWin = document.getElementById("binky-dance");
 
     //sound vars
     cyoa.sounds = {};
@@ -514,16 +518,25 @@ opacity: 1;
       cyoa.image.walk.classList.remove("display-none");
       cyoa.image.jump.classList.add("display-none");
       cyoa.image.kneel.classList.add("display-none");
+      cyoa.image.binkyWin.classList.add("display-none");
     }
     cyoa.funk.imgWin = function() {
       cyoa.image.walk.classList.add("display-none");
       cyoa.image.jump.classList.remove("display-none");
       cyoa.image.kneel.classList.add("display-none");
+      cyoa.image.binkyWin.classList.add("display-none");
     }
     cyoa.funk.imgLose = function() {
       cyoa.image.walk.classList.add("display-none");
       cyoa.image.jump.classList.add("display-none");
       cyoa.image.kneel.classList.remove("display-none");
+      cyoa.image.binkyWin.classList.add("display-none");
+    }
+    cyoa.funk.binkyWin = function() {
+      cyoa.image.walk.classList.add("display-none");
+      cyoa.image.jump.classList.add("display-none");
+      cyoa.image.kneel.classList.add("display-none");
+      cyoa.image.binkyWin.classList.remove("display-none");
     }
     cyoa.funk.minorRandomizer = function () {
       var randomSeed = Math.random();
@@ -630,6 +643,7 @@ opacity: 1;
       cyoa.data.statValues[4] -=35;
       cyoa.data.statValues[3] +=20;
       cyoa.funk.updateStats();
+      cyoa.funk.binkyWin();
       setTimeout(function() {cyoa.data.pMake0.textContent = "You took second place, but it was close. It really looked like you were going to win, but Sgt. Binky took the lead in the last round."}, cyoa.data.timing1);
       setTimeout(function() {cyoa.data.pMake1.textContent = "You'll never quite understand how Binky manages to work the controller with those giant bear paws..."}, cyoa.data.timing2);
       cyoa.funk.optSetNextDay();
