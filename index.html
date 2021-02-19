@@ -382,6 +382,8 @@ and is in no way endorsed by said user.-->
     cyoa.data.bossLinks = document.getElementById("boss_links");
     cyoa.data.oapLink = document.getElementById("oap_link");
     cyoa.data.phLinks = document.getElementById("ph_links");
+    cyoa.data.phLinks = document.getElementById("ph_links");
+    cyoa.data.top = document.getElementById("cyoa_top");
 
     //image vars
     cyoa.image = {};
@@ -1141,6 +1143,7 @@ and is in no way endorsed by said user.-->
     // Event listener that controls everything that happens
 
     cyoa.data.rpgOptions.addEventListener("click", function(e) {
+      cyoa.data.top.scrollIntoView();
       if(e.target.getAttribute('data-choice') === "0"){ //Start a new game button
         if (cyoa.data.clicker == true){
           cyoa.funk.snDiaKickoff();
